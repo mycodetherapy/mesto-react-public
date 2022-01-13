@@ -1,0 +1,16 @@
+.element__like-container {
+  /* border: 1px solid red; */
+  width: 22px;
+  height: auto;
+  margin-right: 21px;
+  padding: 0;
+  align-self: center;
+  display: grid;
+  justify-items: center;
+}
+
+@media (max-width: 450px) {
+  .element__like-container {
+    margin-right: 15px;
+  }
+}

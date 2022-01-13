@@ -1,0 +1,13 @@
+.element {
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    grid-template-rows: 1fr; 
+
+}

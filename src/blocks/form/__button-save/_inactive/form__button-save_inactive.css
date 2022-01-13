@@ -1,0 +1,8 @@
+.form__button-save_inactive {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.form__button-save:hover {
+  opacity: 0.2;
+}

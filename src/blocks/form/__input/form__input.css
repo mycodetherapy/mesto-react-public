@@ -1,0 +1,14 @@
+.form__input {
+  margin: 0;
+  padding-bottom: 7px;
+  border: none;
+  font-size: 14px;
+  line-height: 17px;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  font-family: inherit;
+  width: 100%;
+}
+
+.form__input:focus {
+  outline: none;
+}
