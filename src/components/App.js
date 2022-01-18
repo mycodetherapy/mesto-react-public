@@ -9,11 +9,15 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import DeleteCardPopup from "./DeleteCardPopup";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import { useHistory } from "react-router";
 import Register from "./Register";
 import Login from "./Login";
+import * as Auth from "./Auth";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
+  const [loggedIn, setLoggedIn] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -27,6 +31,11 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
+  const history = useHistory();
+
+  React.useEffect(() => {
+    tokenCheck();
+  }, []);
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getCards()])
@@ -38,6 +47,28 @@ function App() {
         console.log(err);
       });
   }, []);
+
+  const handleLoggin = () => {
+    setLoggedIn(!loggedIn);
+  };
+
+
+  function tokenCheck() {
+    // если у пользователя есть токен в localStorage,
+    // эта функция проверит, действующий он или нет
+    if (localStorage.getItem("token")) {
+      const token = localStorage.getItem("token");
+      if (token) {
+        Auth.getContent(token).then((res) => {
+          if(res) {
+            handleLoggin();
+            history.push("/");
+          }
+        });
+      }
+    }
+  };
+  
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -126,13 +157,26 @@ function App() {
         <div className="page">
           <Header />
           <Switch>
-            <Route path="/sign-up">
+           
+          <Route path="/sign-up">
               <Register />
             </Route>
             <Route path="/sign-in">
-              <Login />
+              <Login handleLoggin={handleLoggin} />
             </Route>
-            <Route path="/">
+            
+            <ProtectedRoute path="/" 
+            loggedIn={loggedIn} 
+            component={Main}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onEditAvatar={handleEditAvatarClick}
+            onCardClick={handleCardClick}
+            cards={cards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleDeleteCardClick}
+            />
+            {/* <Route exact path="/">
               <Main
                 onEditProfile={handleEditProfileClick}
                 onAddPlace={handleAddPlaceClick}
@@ -142,9 +186,17 @@ function App() {
                 onCardLike={handleCardLike}
                 onCardDelete={handleDeleteCardClick}
               />
+            </Route> */}
+
+            <Route>
+              {!loggedIn ? (
+                <Redirect to="/"></Redirect>
+              ) : (
+                <Redirect to="/sign-in"></Redirect>
+              )}
             </Route>
           </Switch>
-          
+
           <Footer />
 
           <EditProfilePopup

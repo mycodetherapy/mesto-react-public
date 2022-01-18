@@ -3,4 +3,13 @@
   margin: 0 auto;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
   overflow: hidden;
+  display: flex;
+  flex-flow: wrap-reverse;
+}
+
+@media (max-width: 600px) {
+  .header {
+    /* flex-direction: column-reverse; */
+    /* align-items: flex-end; */
+  }
 }

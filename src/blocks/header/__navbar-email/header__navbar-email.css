@@ -1,0 +1,16 @@
+.header__navbar-email {
+    border: 1px solid red;
+    color: #FFFFFF;
+    font-size: 18px;
+    display: inline-block;
+    margin: 0;
+    padding-right: 24px;
+}
+
+@media (max-width: 600px) {
+    .header__navbar-email {
+        padding: 0;
+        margin-bottom: 18px;
+        margin-top: 40px;
+    }
+}

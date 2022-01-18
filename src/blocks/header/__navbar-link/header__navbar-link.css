@@ -1,0 +1,11 @@
+.header__navbar-link {
+  border: 1px solid red;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+@media (max-width: 600px) {
+  .header__navbar-link {
+    margin-bottom: 40px;
+  }
+}

@@ -1,22 +1,26 @@
 import React from "react";
 
 function WelcomeForm({
-    name,
-    title,
-    buttonText,
-    topLinkText,
-    bottomLinkText,
-    onSubmit,
-    email,
-    password
+  name,
+  title,
+  buttonText,
+  topLinkText,
+  bottomLinkText,
+  onSubmit,
+  onEmail,
+  onPassword,
+  password,
+  email,
 }) {
   return (
     <div className="welcome">
-      <a href="" className="welcome__link-top">{topLinkText}</a>
+      <a href="" className="welcome__link-top">
+        {topLinkText}
+      </a>
       <form
         name={name}
         className="welcome__form"
-        onSubmit=""
+        onSubmit={onSubmit}
         noValidate
       >
         <fieldset className="welcome__input-container">
@@ -28,6 +32,7 @@ function WelcomeForm({
               name="username"
               type="text"
               placeholder="Email"
+              onChange={onEmail}
               value={email}
             ></input>
           </label>
@@ -38,6 +43,7 @@ function WelcomeForm({
               name="password"
               type="password"
               placeholder="Пароль"
+              onChange={onPassword}
               value={password}
             ></input>
           </label>
@@ -45,7 +51,9 @@ function WelcomeForm({
         <button className="welcome__button" type="submit">
           {buttonText}
         </button>
-        <a href="" className="welcome__link-bottom">{bottomLinkText}</a>
+        <a href="" className="welcome__link-bottom">
+          {bottomLinkText}
+        </a>
       </form>
     </div>
   );

@@ -1,0 +1,26 @@
+.header__navbar-menu-label {
+  width: 22px;
+  height: 22px;
+  font-size: 22px;
+  text-align: center;
+  cursor: pointer;
+  color: #ffffff;
+  align-self: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+  /* display: none; */
+  width: 0px;
+}
+
+@media (max-width: 600px) {
+  .header__navbar-menu-label {
+    /* display: block; */
+    margin-right: 30px;
+    width: 22px;
+
+    visibility: visible;
+    opacity: 1;
+    transition: 0.3s;
+  }
+}
