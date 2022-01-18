@@ -32,6 +32,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const history = useHistory();
+  const [email, setEmail] = React.useState("");
 
   React.useEffect(() => {
     tokenCheck();
@@ -52,7 +53,6 @@ function App() {
     setLoggedIn(!loggedIn);
   };
 
-
   function tokenCheck() {
     // если у пользователя есть токен в localStorage,
     // эта функция проверит, действующий он или нет
@@ -60,15 +60,19 @@ function App() {
       const token = localStorage.getItem("token");
       if (token) {
         Auth.getContent(token).then((res) => {
-          if(res) {
+          if (res) {
+            console.log(res);
+            setEmail(res.data.email);
+            console.log(email);
             handleLoggin();
             history.push("/");
+          } else {
+            history.push("/sign-in");
           }
         });
       }
     }
-  };
-  
+  }
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -155,26 +159,26 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="common">
         <div className="page">
-          <Header />
+          <Header email={email} />
           <Switch>
-           
-          <Route path="/sign-up">
+            <Route path="/sign-up">
               <Register />
             </Route>
             <Route path="/sign-in">
               <Login handleLoggin={handleLoggin} />
             </Route>
-            
-            <ProtectedRoute path="/" 
-            loggedIn={loggedIn} 
-            component={Main}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onEditAvatar={handleEditAvatarClick}
-            onCardClick={handleCardClick}
-            cards={cards}
-            onCardLike={handleCardLike}
-            onCardDelete={handleDeleteCardClick}
+
+            <ProtectedRoute
+              path="/"
+              loggedIn={loggedIn}
+              component={Main}
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onEditAvatar={handleEditAvatarClick}
+              onCardClick={handleCardClick}
+              cards={cards}
+              onCardLike={handleCardLike}
+              onCardDelete={handleDeleteCardClick}
             />
             {/* <Route exact path="/">
               <Main

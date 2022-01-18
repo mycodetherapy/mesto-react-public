@@ -10,9 +10,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0 30px;
     max-height: 0px;
     visibility: hidden;
     opacity: 0;
     transition: 0.3s;
   }
 }
+
+@media (max-width: 950px) {
+    .header__navbar {
+      padding: 0 19px;
+    }
+  }

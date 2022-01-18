@@ -4,7 +4,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 
-function Header() {
+function Header({email}) {
   const history = useHistory();
 
   function signOut() {
@@ -28,7 +28,7 @@ function Header() {
         </label>
        
       <div className="header__navbar">
-        <p className="header__navbar-email">qwer</p>
+        <p className="header__navbar-email">{email}</p>
         <a href="" className="header__navbar-link" onClick={signOut}>
           Выйти
         </a>
