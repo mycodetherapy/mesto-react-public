@@ -1,36 +1,37 @@
 import logo from "../images/logo.svg";
 import close from "../images/close-icon-s.svg"
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
-function Header({email}) {
+function Header({email, nameLink, handleNameLink, puth, classActive, classHidden}) {
   const history = useHistory();
 
   function signOut() {
     localStorage.removeItem("token");
+    // handleNameLink("Регистрация");
     history.push("/sign-in");
   }
 
   return (
     <header className="header">
-      <input class="header__navbar-menu" id="navbar-menu" type="checkbox" />
+      <input className="header__navbar-menu" id="navbar-menu" type="checkbox" />
       <img className="header__logo" src={logo} alt="логотип" />
-      <label class="header__navbar-close" for="navbar-menu">
+      <label className="header__navbar-close" htmlFor="navbar-menu">
           <img
             className="header__navbar-close-image"
             src={close}
             alt="Закрыть"
           />
         </label>
-        <label class="header__navbar-menu-label" for="navbar-menu">
+        <label className={`header__navbar-menu-label ${classHidden}`} htmlFor="navbar-menu">
           &#9776;
         </label>
        
-      <div className="header__navbar">
+      <div className={`header__navbar ${classActive}`}>
         <p className="header__navbar-email">{email}</p>
-        <a href="" className="header__navbar-link" onClick={signOut}>
-          Выйти
+        <a href={puth} className="header__navbar-link" onClick={signOut}>
+          {nameLink}
         </a>
       </div>
       

@@ -7,15 +7,17 @@
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__logo/header__logo.css);
 @import url(./blocks/header/__navbar/header__navbar.css);
+@import url(./blocks/header/__navbar/_active/header__navbar_active.css);
 @import url(./blocks/header/__navbar-email/header__navbar-email.css);
 @import url(./blocks/header/__navbar-link/header__navbar-link.css);
 @import url(./blocks/header/__navbar-menu/header__navbar-menu.css);
 @import url(./blocks/header/__navbar-menu-label/header__navbar-menu-label.css);
+@import url(./blocks/header/__navbar-menu-label/_hidden/header__navbar-menu-label_hidden.css);
 @import url(./blocks/header/__navbar-close/header__navbar-close.css);
 @import url(./blocks/header/__navbar-close-image/header__navbar-close-image.css);
 
 @import url(./blocks/welcome/welcome.css);
-@import url(./blocks/welcome/__link-top/welcome__link-top.css);
+@import url(./blocks/welcome/__form/welcome__form.css);
 @import url(./blocks/welcome/__link-bottom/welcome__link-bottom.css);
 @import url(./blocks/welcome/__input-container/welcome__input-container.css);
 @import url(./blocks/welcome/__title/welcome__title.css);

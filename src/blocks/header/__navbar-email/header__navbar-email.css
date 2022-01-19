@@ -9,7 +9,7 @@
 
 @media (max-width: 600px) {
     .header__navbar-email {
-        padding: 0;
+        /* padding: 0; */
         margin-bottom: 18px;
         margin-top: 40px;
     }

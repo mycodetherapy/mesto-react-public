@@ -1,0 +1,6 @@
+.header__navbar-menu-label_hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+  width: 0px;
+}

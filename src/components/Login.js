@@ -2,12 +2,23 @@ import React from "react";
 import WelcomeForm from "./WelcomeForm";
 import * as Auth from "./Auth";
 import { useHistory } from "react-router";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
-function Login({handleLoggin}) {
+function Login({
+  handleLoggin,
+  handleNameLink,
+  handlePuth,
+  handleNavbarActive,
+  handleNavbarMenuHidden,
+}) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const history = useHistory();
+
+  // handleNavbarActive("header__navbar_active");
+  // handleNavbarMenuHidden("header__navbar-menu-label_hidden");
+
+  // handleNameLink("Регистрация");
 
   function handleEmailChange(e) {
     setEmail(e.target.value);
@@ -24,6 +35,10 @@ function Login({handleLoggin}) {
       if (data) {
         console.log(data);
         handleLoggin();
+        handleNameLink("Выйти");
+        handlePuth("");
+        handleNavbarActive("");
+        handleNavbarMenuHidden("");
         history.push("/");
       } else {
         console.log("Что-то пошло не так!");
@@ -36,7 +51,6 @@ function Login({handleLoggin}) {
       name="login-form"
       title="Вход"
       buttonText="Войти"
-      topLinkText="Регистрация"
       bottomLinkText=""
       onEmail={handleEmailChange}
       onPassword={handlePasswordChange}
@@ -47,4 +61,4 @@ function Login({handleLoggin}) {
   );
 }
 
-export default withRouter (Login);
+export default withRouter(Login);

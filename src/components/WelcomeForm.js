@@ -6,6 +6,7 @@ function WelcomeForm({
   buttonText,
   topLinkText,
   bottomLinkText,
+  linkPuth,
   onSubmit,
   onEmail,
   onPassword,
@@ -14,9 +15,6 @@ function WelcomeForm({
 }) {
   return (
     <div className="welcome">
-      <a href="" className="welcome__link-top">
-        {topLinkText}
-      </a>
       <form
         name={name}
         className="welcome__form"
@@ -33,7 +31,7 @@ function WelcomeForm({
               type="text"
               placeholder="Email"
               onChange={onEmail}
-              value={email}
+              value={email || ""}
             ></input>
           </label>
           <label className="welcome__label" htmlFor="password">
@@ -51,7 +49,7 @@ function WelcomeForm({
         <button className="welcome__button" type="submit">
           {buttonText}
         </button>
-        <a href="" className="welcome__link-bottom">
+        <a href={linkPuth} className="welcome__link-bottom">
           {bottomLinkText}
         </a>
       </form>

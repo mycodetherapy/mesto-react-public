@@ -1,0 +1,17 @@
+.header__navbar_active {
+  display: block;
+
+  min-width: auto;
+  visibility: visible;
+  max-height: fit-content;
+  opacity: 1;
+  transition: 0.3s;
+  padding: 0 19px;
+  margin-top: -40px;
+}
+
+@media (min-width: 601px) {
+  .header__navbar_active {
+    margin-top: 0px;
+  }
+}

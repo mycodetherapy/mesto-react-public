@@ -32,11 +32,11 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const history = useHistory();
-  const [email, setEmail] = React.useState("");
-
-  React.useEffect(() => {
-    tokenCheck();
-  }, []);
+  // const [email, setEmail] = React.useState("");
+  const [nameLink, setNameLink] = React.useState("Регистрация");
+  const [puth, setPuth] = React.useState("/sign-up");
+  const [navbarActive, setNavbarActive] = React.useState("");
+  const [navbarMenuHidden, setNavbarMenuHidden] = React.useState("");
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getCards()])
@@ -49,8 +49,28 @@ function App() {
       });
   }, []);
 
+  React.useEffect(() => {
+    tokenCheck();
+  }, [history]);
+
   const handleLoggin = () => {
     setLoggedIn(!loggedIn);
+  };
+
+  const handleNameLink = (name) => {
+    setNameLink(name);
+  };
+
+  const handlePuth = (Puth) => {
+    setPuth(Puth);
+  };
+
+  const handleNavbarActive = (className) => {
+    setNavbarActive(className);
+  };
+
+  const handleNavbarMenuHidden = (className) => {
+    setNavbarMenuHidden(className);
   };
 
   function tokenCheck() {
@@ -62,12 +82,18 @@ function App() {
         Auth.getContent(token).then((res) => {
           if (res) {
             console.log(res);
-            setEmail(res.data.email);
-            console.log(email);
+            // setEmail(res.data.email);
+            handleNameLink("Выйти");
+            handleNavbarActive("");
+            handleNavbarMenuHidden("");
+            setPuth("");
+            // console.log(email);
             handleLoggin();
             history.push("/");
           } else {
             history.push("/sign-in");
+
+            // handleNameLink("Регистрация");
           }
         });
       }
@@ -159,13 +185,30 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="common">
         <div className="page">
-          <Header email={email} />
+          <Header
+            // email={email}
+            nameLink={nameLink}
+            puth={puth}
+            classActive={navbarActive}
+            classHidden={navbarMenuHidden}
+          />
           <Switch>
             <Route path="/sign-up">
-              <Register />
+              <Register
+                handleNameLink={handleNameLink}
+                handlePuth={handlePuth}
+                handleNavbarActive={handleNavbarActive}
+                handleNavbarMenuHidden={handleNavbarMenuHidden}
+              />
             </Route>
             <Route path="/sign-in">
-              <Login handleLoggin={handleLoggin} />
+              <Login
+                handleLoggin={handleLoggin}
+                handleNameLink={handleNameLink}
+                handlePuth={handlePuth}
+                handleNavbarActive={handleNavbarActive}
+                handleNavbarMenuHidden={handleNavbarMenuHidden}
+              />
             </Route>
 
             <ProtectedRoute

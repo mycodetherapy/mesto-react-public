@@ -1,12 +1,22 @@
 import React from "react";
 import WelcomeForm from "./WelcomeForm";
-import * as  Auth from "./Auth";
+import * as Auth from "./Auth";
 import { useHistory } from "react-router";
 
-function Register() {
+function Register({
+  handleNameLink,
+  handlePuth,
+  handleNavbarActive,
+  handleNavbarMenuHidden,
+}) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const history = useHistory();
+
+  handleNameLink("Войти");
+  handlePuth("/sign-in");
+  handleNavbarActive("header__navbar_active");
+  handleNavbarMenuHidden("header__navbar-menu-label_hidden");
 
   function handleEmailChange(e) {
     setEmail(e.target.value);
@@ -24,7 +34,7 @@ function Register() {
         console.log(res);
         history.push("/sign-in");
       } else {
-        console.log('Что-то пошло не так!');
+        console.log("Что-то пошло не так!");
       }
     });
   }
@@ -34,8 +44,8 @@ function Register() {
       name="register-form"
       title="Регистрация"
       buttonText="Зарегистрироваться"
-      topLinkText="Войти"
       bottomLinkText="Уже зарегистрированы? Войти"
+      linkPuth="/sign-in"
       onEmail={handleEmailChange}
       onPassword={handlePasswordChange}
       onSubmit={handleSubmit}
