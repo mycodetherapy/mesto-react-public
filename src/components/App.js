@@ -5,6 +5,7 @@ import ImagePopup from "./ImagePopup";
 import api from "../utils/Api.js";
 import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { DataHeaderContext } from "../contexts/DataHeaderContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
@@ -32,11 +33,12 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const history = useHistory();
-  // const [email, setEmail] = React.useState("");
+  const [viewEmail, setViewEmail] = React.useState("");
   const [nameLink, setNameLink] = React.useState("Регистрация");
   const [puth, setPuth] = React.useState("/sign-up");
   const [navbarActive, setNavbarActive] = React.useState("");
   const [navbarMenuHidden, setNavbarMenuHidden] = React.useState("");
+  const [dataHeader, setDataHeader] = React.useState({});
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getCards()])
@@ -51,27 +53,19 @@ function App() {
 
   React.useEffect(() => {
     tokenCheck();
-  }, [history]);
+  }, []);
 
   const handleLoggin = () => {
+    // e.preventDefault();
     setLoggedIn(!loggedIn);
   };
 
-  const handleNameLink = (name) => {
-    setNameLink(name);
+  const HandleRegisterEmail = (email) => {
+    setViewEmail(email);
   };
 
-  const handlePuth = (Puth) => {
-    setPuth(Puth);
-  };
-
-  const handleNavbarActive = (className) => {
-    setNavbarActive(className);
-  };
-
-  const handleNavbarMenuHidden = (className) => {
-    setNavbarMenuHidden(className);
-  };
+ 
+  // console.log(history);
 
   function tokenCheck() {
     // если у пользователя есть токен в localStorage,
@@ -79,22 +73,18 @@ function App() {
     if (localStorage.getItem("token")) {
       const token = localStorage.getItem("token");
       if (token) {
+        console.log(token);
         Auth.getContent(token).then((res) => {
           if (res) {
             console.log(res);
-            // setEmail(res.data.email);
-            handleNameLink("Выйти");
-            handleNavbarActive("");
-            handleNavbarMenuHidden("");
-            setPuth("");
+            setViewEmail(res.data.email);
             // console.log(email);
             handleLoggin();
             history.push("/");
-          } else {
-            history.push("/sign-in");
-
-            // handleNameLink("Регистрация");
           }
+          // else {
+          //   history.push("/sign-in");
+          // }
         });
       }
     }
@@ -185,29 +175,20 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="common">
         <div className="page">
-          <Header
-            // email={email}
-            nameLink={nameLink}
-            puth={puth}
-            classActive={navbarActive}
-            classHidden={navbarMenuHidden}
-          />
+          <DataHeaderContext.Provider value={dataHeader}>
+            <Header
+              email={viewEmail}
+            />
+          </DataHeaderContext.Provider>
+
           <Switch>
             <Route path="/sign-up">
-              <Register
-                handleNameLink={handleNameLink}
-                handlePuth={handlePuth}
-                handleNavbarActive={handleNavbarActive}
-                handleNavbarMenuHidden={handleNavbarMenuHidden}
-              />
+              <Register/>
             </Route>
             <Route path="/sign-in">
               <Login
-                handleLoggin={handleLoggin}
-                handleNameLink={handleNameLink}
-                handlePuth={handlePuth}
-                handleNavbarActive={handleNavbarActive}
-                handleNavbarMenuHidden={handleNavbarMenuHidden}
+                onLoggin={handleLoggin}
+                registerEmail={HandleRegisterEmail}
               />
             </Route>
 
@@ -223,17 +204,6 @@ function App() {
               onCardLike={handleCardLike}
               onCardDelete={handleDeleteCardClick}
             />
-            {/* <Route exact path="/">
-              <Main
-                onEditProfile={handleEditProfileClick}
-                onAddPlace={handleAddPlaceClick}
-                onEditAvatar={handleEditAvatarClick}
-                onCardClick={handleCardClick}
-                cards={cards}
-                onCardLike={handleCardLike}
-                onCardDelete={handleDeleteCardClick}
-              />
-            </Route> */}
 
             <Route>
               {!loggedIn ? (

@@ -6,12 +6,13 @@
   max-height: fit-content;
   opacity: 1;
   transition: 0.3s;
-  padding: 0 19px;
-  margin-top: -40px;
+  padding-left: 0px;
+  /* padding: 0 19px; */
+  /* margin-top: -40px; */
 }
 
-@media (min-width: 601px) {
+@media (min-width: 600px) {
   .header__navbar_active {
-    margin-top: 0px;
+    /* margin-top: 0px; */
   }
 }

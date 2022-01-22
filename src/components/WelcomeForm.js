@@ -4,7 +4,6 @@ function WelcomeForm({
   name,
   title,
   buttonText,
-  topLinkText,
   bottomLinkText,
   linkPuth,
   onSubmit,

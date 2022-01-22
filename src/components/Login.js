@@ -4,41 +4,31 @@ import * as Auth from "./Auth";
 import { useHistory } from "react-router";
 import { withRouter } from "react-router-dom";
 
-function Login({
-  handleLoggin,
-  handleNameLink,
-  handlePuth,
-  handleNavbarActive,
-  handleNavbarMenuHidden,
-}) {
+function Login({onLoggin, registerEmail}) {
+  const [registerData, setRegisterData] = React.useState({email: "", password: ""});
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const history = useHistory();
 
-  // handleNavbarActive("header__navbar_active");
-  // handleNavbarMenuHidden("header__navbar-menu-label_hidden");
-
-  // handleNameLink("Регистрация");
-
   function handleEmailChange(e) {
-    setEmail(e.target.value);
+    setRegisterData({...registerData, email: e.target.value})
+    //setEmail(e.target.value);
   }
 
   function handlePasswordChange(e) {
-    setPassword(e.target.value);
+    setRegisterData({...registerData, password: e.target.value})
+    //setPassword(e.target.value);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(email, password);
+    let {email, password} = registerData;
+    console.log(email);
     Auth.authorization(password, email).then((data) => {
       if (data) {
         console.log(data);
-        handleLoggin();
-        handleNameLink("Выйти");
-        handlePuth("");
-        handleNavbarActive("");
-        handleNavbarMenuHidden("");
+        onLoggin();
+        registerEmail(email);
         history.push("/");
       } else {
         console.log("Что-то пошло не так!");
@@ -55,8 +45,8 @@ function Login({
       onEmail={handleEmailChange}
       onPassword={handlePasswordChange}
       onSubmit={handleSubmit}
-      password={password}
-      email={email}
+      password={registerData.password}
+      email={registerData.email}
     ></WelcomeForm>
   );
 }
