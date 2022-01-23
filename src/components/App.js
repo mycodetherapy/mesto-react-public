@@ -6,6 +6,7 @@ import api from "../utils/Api.js";
 import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { DataHeaderContext } from "../contexts/DataHeaderContext";
+import PopupRegisterTooltip from "./PopupRegisterTooltip";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
@@ -19,6 +20,8 @@ import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [isPopupRegisterTooltip, setIsPopupRegisterTooltip] = React.useState(false);
+  const [tooltipStatus, setTooltipStatus] = React.useState("");
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -34,6 +37,7 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const history = useHistory();
   const [viewEmail, setViewEmail] = React.useState("");
+
   const [nameLink, setNameLink] = React.useState("Регистрация");
   const [puth, setPuth] = React.useState("/sign-up");
   const [navbarActive, setNavbarActive] = React.useState("");
@@ -163,7 +167,16 @@ function App() {
     setIsDeleteCardPopupOpen(true);
   };
 
+  const handleRegisterAction = () => {
+    setIsPopupRegisterTooltip(true);
+  }
+
+  const handleTooltipStatus = () => {
+    setTooltipStatus("success");
+  }
+
   const closeAllPopups = () => {
+    setIsPopupRegisterTooltip(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
@@ -183,7 +196,11 @@ function App() {
 
           <Switch>
             <Route path="/sign-up">
-              <Register/>
+              <Register 
+              onRegister={handleRegisterAction}
+              onStatus={handleTooltipStatus} 
+              />
+             
             </Route>
             <Route path="/sign-in">
               <Login
@@ -216,6 +233,17 @@ function App() {
 
           <Footer />
 
+          {/* <PopupRegisterTooltip>
+            isOpen={isPopupRegisterTooltip}
+            onClose={closeAllPopups}
+          </PopupRegisterTooltip> */}
+
+          <PopupRegisterTooltip
+            isOpen={isPopupRegisterTooltip}
+            onClose={closeAllPopups}
+            status={tooltipStatus}
+          />
+               
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}

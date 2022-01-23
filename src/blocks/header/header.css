@@ -6,10 +6,3 @@
   display: flex;
   flex-flow: wrap-reverse;
 }
-
-@media (max-width: 600px) {
-  .header {
-    /* flex-direction: column-reverse; */
-    /* align-items: flex-end; */
-  }
-}
