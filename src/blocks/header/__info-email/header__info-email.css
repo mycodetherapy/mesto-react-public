@@ -1,4 +1,4 @@
-.header__navbar-email {
+.header__info-email {
     border: 1px solid red;
     color: #FFFFFF;
     font-size: 18px;
@@ -8,7 +8,7 @@
 }
 
 @media (max-width: 600px) {
-    .header__navbar-email {
+    .header__info-email {
         margin-bottom: 18px;
         margin-top: 40px;
         margin-right: 0px;

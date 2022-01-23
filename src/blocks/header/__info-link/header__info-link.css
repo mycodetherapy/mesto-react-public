@@ -1,0 +1,17 @@
+.header__info-link {
+  border: 1px solid red;
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: none;
+
+  /* padding: 0;
+  border: none;
+  background-color: transparent; */
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .header__info-link {
+    margin-bottom: 40px;
+  }
+}

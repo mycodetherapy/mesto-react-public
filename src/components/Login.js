@@ -6,18 +6,14 @@ import { withRouter } from "react-router-dom";
 
 function Login({onLoggin, registerEmail}) {
   const [registerData, setRegisterData] = React.useState({email: "", password: ""});
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
   const history = useHistory();
 
   function handleEmailChange(e) {
-    setRegisterData({...registerData, email: e.target.value})
-    //setEmail(e.target.value);
+    setRegisterData({...registerData, email: e.target.value});
   }
 
   function handlePasswordChange(e) {
-    setRegisterData({...registerData, password: e.target.value})
-    //setPassword(e.target.value);
+    setRegisterData({...registerData, password: e.target.value});
   }
 
   function handleSubmit(e) {

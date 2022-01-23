@@ -5,13 +5,12 @@ import ImagePopup from "./ImagePopup";
 import api from "../utils/Api.js";
 import React from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { DataHeaderContext } from "../contexts/DataHeaderContext";
 import PopupRegisterTooltip from "./PopupRegisterTooltip";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import DeleteCardPopup from "./DeleteCardPopup";
-import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { useHistory } from "react-router";
 import Register from "./Register";
 import Login from "./Login";
@@ -38,12 +37,6 @@ function App() {
   const history = useHistory();
   const [viewEmail, setViewEmail] = React.useState("");
 
-  const [nameLink, setNameLink] = React.useState("Регистрация");
-  const [puth, setPuth] = React.useState("/sign-up");
-  const [navbarActive, setNavbarActive] = React.useState("");
-  const [navbarMenuHidden, setNavbarMenuHidden] = React.useState("");
-  const [dataHeader, setDataHeader] = React.useState({});
-
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getCards()])
       .then(([userData, cardsData]) => {
@@ -60,7 +53,6 @@ function App() {
   }, []);
 
   const handleLoggin = () => {
-    // e.preventDefault();
     setLoggedIn(!loggedIn);
   };
 
@@ -68,12 +60,7 @@ function App() {
     setViewEmail(email);
   };
 
- 
-  // console.log(history);
-
   function tokenCheck() {
-    // если у пользователя есть токен в localStorage,
-    // эта функция проверит, действующий он или нет
     if (localStorage.getItem("token")) {
       const token = localStorage.getItem("token");
       if (token) {
@@ -82,14 +69,14 @@ function App() {
           if (res) {
             console.log(res);
             setViewEmail(res.data.email);
-            // console.log(email);
             handleLoggin();
             history.push("/");
           }
-          // else {
-          //   history.push("/sign-in");
-          // }
-        });
+          else {
+            console.log("Не верный токен!");
+            history.push("/sign-in");
+          }
+        }).catch((err) => console.log(err));
       }
     }
   }
@@ -188,20 +175,18 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="common">
         <div className="page">
-          <DataHeaderContext.Provider value={dataHeader}>
-            <Header
-              email={viewEmail}
-            />
-          </DataHeaderContext.Provider>
+        
+          <Header email={viewEmail} />
 
           <Switch>
+
             <Route path="/sign-up">
               <Register 
               onRegister={handleRegisterAction}
               onStatus={handleTooltipStatus} 
               />
-             
             </Route>
+
             <Route path="/sign-in">
               <Login
                 onLoggin={handleLoggin}
@@ -229,14 +214,10 @@ function App() {
                 <Redirect to="/sign-in"></Redirect>
               )}
             </Route>
+
           </Switch>
 
           <Footer />
-
-          {/* <PopupRegisterTooltip>
-            isOpen={isPopupRegisterTooltip}
-            onClose={closeAllPopups}
-          </PopupRegisterTooltip> */}
 
           <PopupRegisterTooltip
             isOpen={isPopupRegisterTooltip}

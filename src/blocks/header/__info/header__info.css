@@ -1,10 +1,10 @@
-.header__navbar {
+.header__info {
   border: 1px solid red;
   align-self: center;
 }
 
 @media (max-width: 600px) {
-  .header__navbar {
+  .header__info {
     border-bottom: 1px solid rgba(84, 84, 84, 0.7);
     min-width: 100%;
     display: flex;
@@ -18,7 +18,7 @@
 }
 
 @media (max-width: 950px) {
-    .header__navbar {
+    .header__info {
       padding: 0 19px;
     }
   }

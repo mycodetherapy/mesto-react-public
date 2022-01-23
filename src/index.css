@@ -6,15 +6,16 @@
 
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__logo/header__logo.css);
-@import url(./blocks/header/__navbar/header__navbar.css);
-@import url(./blocks/header/__navbar/_active/header__navbar_active.css);
-@import url(./blocks/header/__navbar-email/header__navbar-email.css);
-@import url(./blocks/header/__navbar-link/header__navbar-link.css);
-@import url(./blocks/header/__navbar-menu/header__navbar-menu.css);
-@import url(./blocks/header/__navbar-menu-label/header__navbar-menu-label.css);
-@import url(./blocks/header/__navbar-menu-label/_hidden/header__navbar-menu-label_hidden.css);
-@import url(./blocks/header/__navbar-close/header__navbar-close.css);
-@import url(./blocks/header/__navbar-close-image/header__navbar-close-image.css);
+@import url(./blocks/header/__info/header__info.css);
+@import url(./blocks/header/__info/_active/header__info_active.css);
+@import url(./blocks/header/__info-email/header__info-email.css);
+@import url(./blocks/header/__info-link/header__info-link.css);
+@import url(./blocks/header/__info-button/header__info-button.css);
+@import url(./blocks/header/__menu/header__menu.css);
+@import url(./blocks/header/__menu-label/header__menu-label.css);
+@import url(./blocks/header/__menu-label/_hidden/header__menu-label_hidden.css);
+@import url(./blocks/header/__close-menu/header__close-menu.css);
+@import url(./blocks/header/__close-menu-image/header__close-menu-image.css);
 
 @import url(./blocks/welcome/welcome.css);
 @import url(./blocks/welcome/__form/welcome__form.css);

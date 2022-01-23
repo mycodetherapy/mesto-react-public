@@ -16,37 +16,37 @@ function Header({email}) {
       
       <img className="header__logo" src={logo} alt="логотип" />
       <Route exact path={"/"}>
-        <input className="header__navbar-menu" id="navbar-menu" type="checkbox" />
-        <label className="header__navbar-close" htmlFor="navbar-menu">
+        <input className="header__menu" id="info-menu" type="checkbox" />
+        <label className="header__close-menu" htmlFor="info-menu">
           <img
-            className="header__navbar-close-image"
+            className="header__close-menu-image"
             src={close}
             alt="Закрыть"
           />
         </label>
-        <label className="header__navbar-menu-label" htmlFor="navbar-menu">
+        <label className="header__menu-label" htmlFor="info-menu">
           &#9776;
         </label>
 
-        <div className="header__navbar">
-          <p className="header__navbar-email">{email}</p>
-          <a href="" className="header__navbar-link" onClick={signOut}>
+        <div className="header__info">
+          <p className="header__info-email">{email}</p>
+          <button className="header__info-button" onClick={signOut}>
             "Выйти"
-          </a>
+          </button>
         </div>
       </Route>
      
       <Route path={"/sign-up"}>
-        <div className="header__navbar header__navbar_active">
-          <Link to="sign-in" className="header__navbar-link">
+        <div className="header__info header__info_active">
+          <Link to="sign-in" className="header__info-link">
             "Войти"
           </Link>
         </div>
       </Route>
 
       <Route path={"/sign-in"}>
-        <div className="header__navbar header__navbar_active">
-          <Link to="sign-up" className="header__navbar-link">
+        <div className="header__info header__info_active">
+          <Link to="sign-up" className="header__info-link">
             "Регистрация"
           </Link>
         </div>

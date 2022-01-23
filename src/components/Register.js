@@ -27,10 +27,8 @@ function Register({ onRegister, onStatus }) {
         if (res) {
           console.log(res);
           onStatus();
-          //onRegister();
           history.push("/sign-in");
         } else {
-          //onRegister();
           console.log("Что-то пошло не так!");
         }
       })
