@@ -1,16 +1,15 @@
 .header__info-email {
-    border: 1px solid red;
-    color: #FFFFFF;
-    font-size: 18px;
-    display: inline-block;
-    margin: 0;
-    margin-right: 24px;
+  color: #ffffff;
+  font-size: 18px;
+  display: inline-block;
+  margin: 0;
+  margin-right: 24px;
 }
 
 @media (max-width: 600px) {
-    .header__info-email {
-        margin-bottom: 18px;
-        margin-top: 40px;
-        margin-right: 0px;
-    }
+  .header__info-email {
+    margin-bottom: 18px;
+    margin-top: 40px;
+    margin-right: 0px;
+  }
 }

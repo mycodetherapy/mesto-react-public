@@ -1,7 +1,16 @@
 .welcome__title {
-    font-size: 24px;
-    font-weight: 900;
-    color: #ffffff;
-    margin: 0 auto 50px auto;
-    text-align: center;
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 auto 47px auto;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .welcome__title {
+    margin-bottom: 39px;
+    font-size: 20px;
+    line-height: 24px;
+  }
 }

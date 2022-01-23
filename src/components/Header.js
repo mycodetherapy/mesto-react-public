@@ -31,7 +31,7 @@ function Header({email}) {
         <div className="header__info">
           <p className="header__info-email">{email}</p>
           <button className="header__info-button" onClick={signOut}>
-            "Выйти"
+            Выйти
           </button>
         </div>
       </Route>
@@ -39,7 +39,7 @@ function Header({email}) {
       <Route path={"/sign-up"}>
         <div className="header__info header__info_active">
           <Link to="sign-in" className="header__info-link">
-            "Войти"
+            Войти
           </Link>
         </div>
       </Route>
@@ -47,7 +47,7 @@ function Header({email}) {
       <Route path={"/sign-in"}>
         <div className="header__info header__info_active">
           <Link to="sign-up" className="header__info-link">
-            "Регистрация"
+            Регистрация
           </Link>
         </div>
       </Route>

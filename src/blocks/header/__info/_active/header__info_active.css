@@ -1,11 +1,11 @@
 .header__info_active {
   display: block;
-
   min-width: auto;
   visibility: visible;
   max-height: fit-content;
   opacity: 1;
   transition: 0.3s;
   padding-left: 0px;
+  margin-right: 30px;
 }
 

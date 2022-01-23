@@ -1,4 +1,9 @@
 .welcome__form {
-    /* max-width: 358px;
-    margin: 0 auto; */
+  margin-top: 60px;
+}
+
+@media (max-width: 600px) {
+  .welcome__form {
+    margin-top: 36px;
+  }
 }

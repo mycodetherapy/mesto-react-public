@@ -1,7 +1,7 @@
 .header__menu-label {
-  width: 22px;
-  height: 22px;
-  font-size: 22px;
+  width: 25px;
+  height: 38px;
+  font-size: 30px;
   text-align: center;
   cursor: pointer;
   color: #ffffff;
@@ -9,15 +9,13 @@
   visibility: hidden;
   opacity: 0;
   transition: 0.3s;
-  /* display: none; */
   width: 0px;
 }
 
 @media (max-width: 600px) {
   .header__menu-label {
-    /* display: block; */
     margin-right: 30px;
-    width: 22px;
+    width: 25px;
 
     visibility: visible;
     opacity: 1;

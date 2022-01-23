@@ -1,9 +1,13 @@
 .welcome__input {
-    width: 100%;
-    height: 27px;
-    border: none;
-    border-bottom: 2px solid #CCCCCC;
-    outline: none;
-    background: transparent;
-    color: #CCCCCC;
+  width: 100%;
+  height: 27px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  border-bottom: 2px solid #cccccc;
+  outline: none;
+  background: transparent;
+  color: #FFFFFF;
+  padding: 0;
 }

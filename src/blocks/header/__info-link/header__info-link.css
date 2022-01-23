@@ -1,17 +1,20 @@
 .header__info-link {
-  border: 1px solid red;
   color: #ffffff;
   font-size: 18px;
+  line-height: 22px;
   text-decoration: none;
-
-  /* padding: 0;
-  border: none;
-  background-color: transparent; */
   cursor: pointer;
+}
+
+.header__info-link:hover {
+  opacity: 0.6;
+  transition: 0.3s;
 }
 
 @media (max-width: 600px) {
   .header__info-link {
     margin-bottom: 40px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }

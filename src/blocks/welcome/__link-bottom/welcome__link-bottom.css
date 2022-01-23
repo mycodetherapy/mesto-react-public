@@ -1,3 +1,20 @@
 .welcome__link-bottom {
-    color: #ffffff;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.welcome__link-bottom:hover {
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+@media (max-width: 600px) {
+  .welcome__link-bottom {
+    margin-top: 20px;
+  }
 }

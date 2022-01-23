@@ -3,6 +3,22 @@
   height: 50px;
   border-radius: 2px;
   background: #ffffff;
+  border: none;
+  cursor: pointer;
   font-size: 18px;
-  margin-top: 186px;
+  line-height: 22px;
+  margin-top: 188px;
+}
+
+.welcome__button:hover {
+  opacity: 0.85;
+  transition: 0.3s;
+}
+
+@media (max-width: 600px) {
+  .welcome__button {
+    font-size: 16px;
+    line-height: 19px;
+    margin-top: 144px;
+  }
 }
