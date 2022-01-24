@@ -19,7 +19,8 @@ import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [isPopupRegisterTooltip, setIsPopupRegisterTooltip] = React.useState(false);
+  const [isPopupRegisterTooltip, setIsPopupRegisterTooltip] =
+    React.useState(false);
   const [tooltipStatus, setTooltipStatus] = React.useState("");
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
@@ -37,49 +38,55 @@ function App() {
   const history = useHistory();
   const [viewEmail, setViewEmail] = React.useState("");
 
+  const token = localStorage.getItem("token");
+
   React.useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getCards()])
-      .then(([userData, cardsData]) => {
+    Promise.all([
+      api.getUserInfo(),
+      api.getCards(),
+      token && Auth.getContent(token),
+    ])
+      .then(([userData, cardsData, registerData]) => {
         setCurrentUser(userData);
         setCards(cardsData);
+        tokenCheck(registerData);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-
-  React.useEffect(() => {
-    tokenCheck();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleLoggin = () => {
-    setLoggedIn(!loggedIn);
+    setLoggedIn(true);
   };
 
   const HandleRegisterEmail = (email) => {
     setViewEmail(email);
   };
 
-  function tokenCheck() {
-    if (localStorage.getItem("token")) {
-      const token = localStorage.getItem("token");
-      if (token) {
-        console.log(token);
-        Auth.getContent(token).then((res) => {
-          if (res) {
-            console.log(res);
-            setViewEmail(res.data.email);
-            handleLoggin();
-            history.push("/");
-          }
-          else {
-            console.log("Не верный токен!");
-            history.push("/sign-in");
-          }
-        }).catch((err) => console.log(err));
-      }
+  function tokenCheck(res) {
+    if (res) {
+      setViewEmail(res.data.email);
+      handleLoggin();
+      history.push("/");
     }
   }
+
+  // function tokenCheck() {
+  //   if (localStorage.getItem("token")) {
+  //     const token = localStorage.getItem("token");
+  //     console.log(token);
+  //     Auth.getContent(token).then((res) => {
+  //       if (res) {
+  //         console.log(res);
+  //         setViewEmail(res.data.email);
+  //         handleLoggin();
+  //         history.push("/");
+  //       }
+  //     });
+  //   }
+  // }
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -156,11 +163,11 @@ function App() {
 
   const handleRegisterAction = () => {
     setIsPopupRegisterTooltip(true);
-  }
+  };
 
   const handleTooltipStatus = () => {
     setTooltipStatus("success");
-  }
+  };
 
   const closeAllPopups = () => {
     setIsPopupRegisterTooltip(false);
@@ -175,15 +182,13 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="common">
         <div className="page">
-        
           <Header email={viewEmail} />
 
           <Switch>
-
             <Route path="/sign-up">
-              <Register 
-              onRegister={handleRegisterAction}
-              onStatus={handleTooltipStatus} 
+              <Register
+                onRegister={handleRegisterAction}
+                onStatus={handleTooltipStatus}
               />
             </Route>
 
@@ -214,7 +219,6 @@ function App() {
                 <Redirect to="/sign-in"></Redirect>
               )}
             </Route>
-
           </Switch>
 
           <Footer />
@@ -224,7 +228,7 @@ function App() {
             onClose={closeAllPopups}
             status={tooltipStatus}
           />
-               
+
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}

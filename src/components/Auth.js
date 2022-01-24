@@ -9,7 +9,6 @@ export const register = (password, email) => {
     body: JSON.stringify({ password: password, email: email }),
   })
     .then((response) => {
-      console.log(response);
       try {
         if (response.status === 201) {
           return response.json();
@@ -19,7 +18,6 @@ export const register = (password, email) => {
       }
     })
     .then((res) => {
-      console.log(res);
       return res;
     })
     .catch((err) => console.log(err));
@@ -36,7 +34,6 @@ export const authorization = (password, email) => {
     .then((res) => res.json())
     .then((data) => {
       if (data.token) {
-        console.log(data);
         localStorage.setItem("token", data.token);
         return data;
       }

@@ -13,7 +13,6 @@
 @import url(./blocks/header/__info-button/header__info-button.css);
 @import url(./blocks/header/__menu/header__menu.css);
 @import url(./blocks/header/__menu-label/header__menu-label.css);
-@import url(./blocks/header/__menu-label/_hidden/header__menu-label_hidden.css);
 @import url(./blocks/header/__close-menu/header__close-menu.css);
 @import url(./blocks/header/__close-menu-image/header__close-menu-image.css);
 

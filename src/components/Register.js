@@ -21,11 +21,9 @@ function Register({ onRegister, onStatus }) {
   function handleSubmit(e) {
     e.preventDefault();
     let { email, password } = registerData;
-    console.log(email, password);
     Auth.register(password, email)
       .then((res) => {
         if (res) {
-          console.log(res);
           onStatus();
           history.push("/sign-in");
         } else {

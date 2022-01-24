@@ -19,10 +19,8 @@ function Login({onLoggin, registerEmail}) {
   function handleSubmit(e) {
     e.preventDefault();
     let {email, password} = registerData;
-    console.log(email);
     Auth.authorization(password, email).then((data) => {
       if (data) {
-        console.log(data);
         onLoggin();
         registerEmail(email);
         history.push("/");
