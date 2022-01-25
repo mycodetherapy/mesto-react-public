@@ -18,7 +18,7 @@ import * as Auth from "./Auth";
 import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isPopupRegisterTooltip, setIsPopupRegisterTooltip] =
     React.useState(false);
   const [tooltipStatus, setTooltipStatus] = React.useState("");
@@ -38,27 +38,39 @@ function App() {
   const history = useHistory();
   const [viewEmail, setViewEmail] = React.useState("");
 
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
 
   React.useEffect(() => {
-    Promise.all([
-      api.getUserInfo(),
-      api.getCards(),
-      token && Auth.getContent(token),
-    ])
-      .then(([userData, cardsData, registerData]) => {
-        setCurrentUser(userData);
-        setCards(cardsData);
+    const token = localStorage.getItem("token");
+    // console.log(token);
+    token &&
+      Auth.getContent(token).then((registerData) => {
         tokenCheck(registerData);
-      })
-      .catch((err) => {
-        console.log(err);
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  React.useEffect(() => {
+    if(isLoggedIn) {
+      Promise.all([
+        // token && Auth.getContent(token),
+        api.getUserInfo(),
+        api.getCards(),
+      ])
+        .then(([userData, cardsData]) => {
+          setCurrentUser(userData);
+          setCards(cardsData);
+          // tokenCheck(registerData);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+   
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn]);
+
   const handleLoggin = () => {
-    setLoggedIn(true);
+    setIsLoggedIn(true);
   };
 
   const HandleRegisterEmail = (email) => {
@@ -201,7 +213,7 @@ function App() {
 
             <ProtectedRoute
               path="/"
-              loggedIn={loggedIn}
+              loggedIn={isLoggedIn}
               component={Main}
               onEditProfile={handleEditProfileClick}
               onAddPlace={handleAddPlaceClick}
@@ -213,7 +225,7 @@ function App() {
             />
 
             <Route>
-              {!loggedIn ? (
+              {!isLoggedIn ? (
                 <Redirect to="/"></Redirect>
               ) : (
                 <Redirect to="/sign-in"></Redirect>
@@ -221,7 +233,7 @@ function App() {
             </Route>
           </Switch>
 
-          <Footer />
+          {isLoggedIn && <Footer />}
 
           <PopupRegisterTooltip
             isOpen={isPopupRegisterTooltip}
