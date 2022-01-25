@@ -1,6 +1,6 @@
 import React from "react";
 import WelcomeForm from "./WelcomeForm";
-import * as Auth from "./Auth";
+import * as Auth from "../utils/Auth";
 import { useHistory } from "react-router";
 import { withRouter } from "react-router-dom";
 
@@ -18,7 +18,7 @@ function Login({onLoggin, registerEmail}) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    let {email, password} = registerData;
+    const {email, password} = registerData;
     Auth.authorization(password, email).then((data) => {
       if (data) {
         onLoggin();

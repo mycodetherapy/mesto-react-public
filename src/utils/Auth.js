@@ -51,6 +51,4 @@ export const getContent = (token) => {
     })
     .then(res => res.json())
     .catch((err) => console.log(err))
-    .then(data => data)
-    .catch((err) => console.log(err));
   }

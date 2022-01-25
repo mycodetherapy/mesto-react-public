@@ -14,7 +14,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { useHistory } from "react-router";
 import Register from "./Register";
 import Login from "./Login";
-import * as Auth from "./Auth";
+import * as Auth from "../utils/Auth";
 import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
   const [isPopupRegisterTooltip, setIsPopupRegisterTooltip] =
     React.useState(false);
   const [tooltipStatus, setTooltipStatus] = React.useState("");
+  const [tooltipText, setTooltipText] = React.useState("Что-то пошло не так! Попробуйте еще раз.");
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -38,35 +39,26 @@ function App() {
   const history = useHistory();
   const [viewEmail, setViewEmail] = React.useState("");
 
-  // const token = localStorage.getItem("token");
-
   React.useEffect(() => {
     const token = localStorage.getItem("token");
-    // console.log(token);
     token &&
       Auth.getContent(token).then((registerData) => {
         tokenCheck(registerData);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
-    if(isLoggedIn) {
-      Promise.all([
-        // token && Auth.getContent(token),
-        api.getUserInfo(),
-        api.getCards(),
-      ])
+    if (isLoggedIn) {
+      Promise.all([api.getUserInfo(), api.getCards()])
         .then(([userData, cardsData]) => {
           setCurrentUser(userData);
           setCards(cardsData);
-          // tokenCheck(registerData);
         })
         .catch((err) => {
           console.log(err);
         });
     }
-   
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
 
   const handleLoggin = () => {
@@ -85,24 +77,9 @@ function App() {
     }
   }
 
-  // function tokenCheck() {
-  //   if (localStorage.getItem("token")) {
-  //     const token = localStorage.getItem("token");
-  //     console.log(token);
-  //     Auth.getContent(token).then((res) => {
-  //       if (res) {
-  //         console.log(res);
-  //         setViewEmail(res.data.email);
-  //         handleLoggin();
-  //         history.push("/");
-  //       }
-  //     });
-  //   }
-  // }
-
   const handleCardLike = (card) => {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    let methodFetchLike = isLiked ? "DELETE" : "PUT";
+    const methodFetchLike = isLiked ? "DELETE" : "PUT";
     api
       .toggleLike(methodFetchLike, card._id, !isLiked)
       .then((newCard) => {
@@ -179,6 +156,7 @@ function App() {
 
   const handleTooltipStatus = () => {
     setTooltipStatus("success");
+    setTooltipText("Вы успешно зарегистрировались!");
   };
 
   const closeAllPopups = () => {
@@ -239,6 +217,7 @@ function App() {
             isOpen={isPopupRegisterTooltip}
             onClose={closeAllPopups}
             status={tooltipStatus}
+            message={tooltipText}
           />
 
           <EditProfilePopup

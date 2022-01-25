@@ -1,6 +1,6 @@
 import React from "react";
 import WelcomeForm from "./WelcomeForm";
-import * as Auth from "./Auth";
+import * as Auth from "../utils/Auth";
 import { useHistory } from "react-router";
 
 function Register({ onRegister, onStatus }) {
@@ -20,7 +20,7 @@ function Register({ onRegister, onStatus }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    let { email, password } = registerData;
+    const { email, password } = registerData;
     Auth.register(password, email)
       .then((res) => {
         if (res) {
