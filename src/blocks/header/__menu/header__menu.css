@@ -3,6 +3,7 @@
 }
 
 .header__menu:checked ~ .header__info {
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
   visibility: visible;
   max-height: 200px;
   opacity: 1;
