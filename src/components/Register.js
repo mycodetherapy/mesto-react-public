@@ -42,7 +42,7 @@ function Register({ onRegister, onStatus }) {
       title="Регистрация"
       buttonText="Зарегистрироваться"
       bottomLinkText="Уже зарегистрированы? Войти"
-      linkPuth="#/sign-in"
+      linkPuth="/#/sign-in"
       onEmail={handleEmailChange}
       onPassword={handlePasswordChange}
       onSubmit={handleSubmit}
