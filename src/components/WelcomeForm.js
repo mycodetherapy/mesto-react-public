@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, Route } from 'react-router-dom';
 
 function WelcomeForm({
   name,
@@ -48,9 +49,11 @@ function WelcomeForm({
         <button className="welcome__button" type="submit">
           {buttonText}
         </button>
-        <a href={linkPuth} className="welcome__link-bottom">
-          {bottomLinkText}
-        </a>
+        <Route path={"/sign-up"}>
+          <Link to="sign-in" className="welcome__link-bottom">
+            {bottomLinkText}
+          </Link>
+        </Route>
       </form>
     </div>
   );
